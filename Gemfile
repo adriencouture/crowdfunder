@@ -22,8 +22,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+# Cocoon makes it easier to handle nested forms.
 gem 'cocoon'
+# Sorcery is a stripped-down, bare-bones authentication library, with which you can write your own authentication flow.
+gem 'sorcery'
+
+gem 'cancancan', '~> 1.10'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -3,7 +3,10 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
   def new
+    # if cureent_user.admin? || current_user.vetted?
     @project = Project.new
+    # else
+    # redirect_to root_path
   end
   def create
     @project = Project.new(project_params)
@@ -13,6 +16,10 @@ class ProjectsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+      @project = Project.find(params[:id])
   end
 
   private
