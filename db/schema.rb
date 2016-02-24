@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223204414) do
+ActiveRecord::Schema.define(version: 20160224223921) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160223204414) do
     t.integer  "backer_count"
     t.string   "category"
     t.integer  "pledge_amount"
+    t.integer  "user_id"
   end
 
   create_table "rewards", force: :cascade do |t|
