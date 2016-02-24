@@ -3,15 +3,13 @@
 <%= link_to 'New Project', new_project_path %><br>
 <%= link_to 'Sign Up', new_user_path %>
 
-
-<% if @projects.any? %>
-<ul>
-<% @projects.each do |project| %>
-    <li class="projects">
-      <%= link_to project.title, project_path(project) %>
-    </li>
-  <% end %>
-  </ul>
-<% else %>
-<h2>No projects yet</h2>
+<%= form_tag projects_path, method: :get, authentication: false, id: 'search-form' do %>
+<%= text_field_tag :search, params[:search] %>
+<%= submit_tag "Search" %>
 <% end %>
+
+<div id="projects_results">
+  <%= render @projects %>
+</div>
+
+<%= link_to 'All Projects', projects_path %>

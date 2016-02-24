@@ -1,0 +1,6 @@
+<%= link_to project_path(project.id) do %>
+  <h2>
+    <%= number_to_currency(project.goal) %>
+    <%= project.title %>
+  </h2>
+<% end %>

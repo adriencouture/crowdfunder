@@ -1,6 +1,15 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all
+    @projects = if params[:search]
+      Project.where("LOWER(title) LIKE LOWER(?)", "%#{params[:search]}") # This is a query into the database
+    else
+    Project.all
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   def new
     # if cureent_user.admin? || current_user.vetted?
@@ -27,7 +36,7 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project)
-          .permit(:title, :description, :goal, :end_date,
+          .permit(:title, :description, :goal, :end_date, :category,
                   rewards_attributes: [:title, :description, :amount, :_destroy])
   end
 

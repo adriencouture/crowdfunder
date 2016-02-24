@@ -1,3 +1,5 @@
+require 'date'
+
 class Project < ActiveRecord::Base
   has_many :rewards
   belongs_to :user
@@ -5,7 +7,8 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :rewards, reject_if: :all_blank, allow_destroy: true
 
 def countdown
-  Time.now.mday - end_date.mday
+  startdate = Time.now
+   (((self.end_date - startdate).to_i / 60) / 60) / 24
 end
 
 end
