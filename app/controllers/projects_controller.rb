@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
   def index
     @projects = if params[:search]
-      Project.where("LOWER(title) LIKE LOWER(?)", "%#{params[:search]}") # This is a query into the database
+      Project.where("LOWER(title) LIKE LOWER(?)", "%#{params[:search]}%") # This is a query into the database
     else
-    Project.all
+      Project.all
     end
 
     respond_to do |format|
@@ -11,19 +11,23 @@ class ProjectsController < ApplicationController
       format.js
     end
   end
+
   def new
     # if cureent_user.admin? || current_user.vetted?
     @project = Project.new
     # else
     # redirect_to root_path
   end
+
   def create
     @project = Project.new(project_params)
+    @project.user_id = current_user.id
 
-    if @project.save
-      redirect_to projects_path, notice: "Project successfullly created!"
+    if @project.valid_?(@project.end_date)
+      @project.save
+        redirect_to projects_path, notice: "Project successfullly created!"
     else
-      render :new
+      render :new, notice: "Project was not saved!!"
     end
   end
 
