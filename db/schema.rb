@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224223921) do
+ActiveRecord::Schema.define(version: 20160226153612) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(version: 20160224223921) do
   end
 
   add_index "rewards", ["project_id"], name: "index_rewards_on_project_id"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "tags", ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",            null: false

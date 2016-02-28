@@ -5,16 +5,27 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" type="text/css" href="styles.scss">
 </head>
 <body>
 
-<% if flash[:notice] %>
-  <p id="notice"><%= flash[:notice] %></p>
-<% end %>
-<% if flash[:alert] %>
-  <p id="alert"><%= flash[:alert] %></p>
-<% end %>
+  <div id="navigation">
+    <h1>Crowdfunder</h1>
+      <div class="user_info">
+        <% if current_user %>
+          <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
+          <%= link_to "Logout", :logout, method: :post %>
+        <% else %>
+          <%= link_to "Register", new_user_path %> |
+          <%= link_to "Login", :login %>
+        <% end %>
+      </div>
+  </div>
 
+  <div>
+    <span id="notice"><%= flash[:notice] %></span>
+    <span id="alert"><%= flash[:alert] %></span>
+  </div>
 
 <%= yield %>
 
